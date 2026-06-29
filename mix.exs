@@ -1,7 +1,7 @@
 defmodule Membrane.Opus.Format.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.3.1"
   @github_url "https://github.com/membraneframework/membrane_opus_format"
 
   def project do
@@ -20,7 +20,8 @@ defmodule Membrane.Opus.Format.Mixfile do
       name: "Membrane: Opus Format",
       source_url: @github_url,
       homepage_url: "https://membraneframework.org",
-      docs: docs()
+      docs: docs(),
+      aliases: [docs: ["docs", &append_llms_links/1]]
     ]
   end
 
@@ -33,7 +34,7 @@ defmodule Membrane.Opus.Format.Mixfile do
   defp deps do
     [
       {:credo, ">= 0.0.0", runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.40.0", only: :dev, runtime: false},
       {:dialyxir, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
@@ -67,9 +68,30 @@ defmodule Membrane.Opus.Format.Mixfile do
     [
       main: "readme",
       extras: ["README.md", "LICENSE"],
-      formatters: ["html"],
       source_ref: "v#{@version}",
       nest_modules_by_prefix: [Membrane.Opus]
     ]
+  end
+
+  defp append_llms_links(_args) do
+    output_dir = docs()[:output] || "doc"
+    path = Path.join(output_dir, "llms.txt")
+
+    if File.exists?(path) do
+      existing = File.read!(path)
+
+      footer = """
+
+
+      ## See Also
+
+      - [Membrane Framework AI Skill](https://hexdocs.pm/membrane_core/skill.md)
+      - [Membrane Core](https://hexdocs.pm/membrane_core/llms.txt)
+      """
+
+      File.write!(path, String.trim_trailing(existing) <> footer)
+    else
+      IO.warn("#{path} not found — llms.txt was not generated, check your ex_doc configuration")
+    end
   end
 end
