@@ -34,7 +34,7 @@ defmodule Membrane.Opus.Format.Mixfile do
   defp deps do
     [
       {:credo, ">= 0.0.0", runtime: false},
-      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.40.0", only: :dev, runtime: false},
       {:dialyxir, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
