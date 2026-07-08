@@ -1,7 +1,7 @@
 defmodule Membrane.Opus.Format.Mixfile do
   use Mix.Project
 
-  @version "0.3.1"
+  @version "0.3.2"
   @github_url "https://github.com/membraneframework/membrane_opus_format"
 
   def project do
@@ -33,7 +33,7 @@ defmodule Membrane.Opus.Format.Mixfile do
 
   defp deps do
     [
-      {:credo, ">= 0.0.0", runtime: false},
+      {:credo, ">= 0.0.0", only: :dev, runtime: false},
       {:ex_doc, ">= 0.40.0", only: :dev, runtime: false},
       {:dialyxir, ">= 0.0.0", only: :dev, runtime: false}
     ]
