@@ -18,7 +18,7 @@ reason, the package can be installed by adding `membrane_opus_format` to your li
 ```elixir
 def deps do
   [
-    {:membrane_opus_format, "~> 0.3.1"}
+    {:membrane_opus_format, "~> 0.3.2"}
   ]
 end
 ```
